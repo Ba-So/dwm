@@ -273,6 +273,8 @@ static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
 static void view(const Arg *arg);
+static void viewmon(const Arg *arg, Monitor *m);
+static void makestatmon(void);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
 static int xerror(Display *dpy, XErrorEvent *ee);
@@ -324,7 +326,7 @@ static Cur *cursor[CurLast];
 static Clr **scheme;
 static Display *dpy;
 static Drw *drw;
-static Monitor *mons, *selmon;
+static Monitor *mons, *selmon, *statmon;
 static Window root, wmcheckwin;
 
 static xcb_connection_t *xcon;
@@ -2351,16 +2353,33 @@ updatewmhints(Client *c)
 void
 view(const Arg *arg)
 {
-  Monitor *m;
-  for (m = mons; m; m = m->next){
-    if ((arg->ui & TAGMASK) == m->tagset[m->seltags])
-      return;
-    m->seltags ^= 1; /* toggle sel tagset */
-    if (arg->ui & TAGMASK)
-      m->tagset[m->seltags] = arg->ui & TAGMASK;
-    focus(NULL);
-    arrange(m);
+  if (!statmon)
+    statmon = mons;
+  if (selmon == statmon ) {
+    viewmon(arg, selmon);
+  } else {
+    Monitor *m;
+    for (m = mons; m; m = m->next){
+      if (m != statmon)
+        viewmon(arg, m);
+    }
   }
+}
+
+void viewmon(const Arg *arg, Monitor *m)
+{
+  if ((arg->ui & TAGMASK) == m->tagset[m->seltags])
+    return;
+  m->seltags ^= 1; /* toggle sel tagset */
+  if (arg->ui & TAGMASK)
+    m->tagset[m->seltags] = arg->ui & TAGMASK;
+  focus(NULL);
+  arrange(m);
+}
+
+void makestatmon(void)
+{
+  statmon = selmon;
 }
 
 pid_t
