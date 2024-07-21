@@ -374,7 +374,7 @@ applyrules(Client *c)
 	class    = ch.res_class ? ch.res_class : broken;
 	instance = ch.res_name  ? ch.res_name  : broken;
 
-	if (strstr(class, "Steam") || strstr(class, "steam_app_"))
+	if (strstr(class, "steam") || strstr(class, "Steam") || strstr(class, "steamwebhelper") || strstr(class, "steam_app_"))
 		c->issteam = 1;
 
 	for (i = 0; i < LENGTH(rules); i++) {
@@ -764,7 +764,7 @@ configurerequest(XEvent *e)
 			c->bw = ev->border_width;
 		else if (c->isfloating || !selmon->lt[selmon->sellt]->arrange) {
 			m = c->mon;
-			if (!c=issteam) {
+			if (!c->issteam) {
 				if (ev->value_mask & CWX) {
 					c->oldx = c->x;
 					c->x = m->mx + ev->x;
@@ -1768,6 +1768,8 @@ setfocus(Client *c)
 			XA_WINDOW, 32, PropModeReplace,
 			(unsigned char *) &(c->win), 1);
 	}
+	if (c->issteam)
+		setclientstate(c, NormalState);
 	sendevent(c, wmatom[WMTakeFocus]);
 }
 
