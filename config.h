@@ -1,9 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
+<<<<<<< HEAD
 #define TERMINAL "alacritty"
 #define TERMCLASS "Alacritty"
 #define BROWSER "brave-browser"
+=======
+#define TERMINAL "st"
+#define TERMCLASS "St"
+#define BROWSER "brave"
+>>>>>>> nix-changes
 
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -50,7 +56,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	*/
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1 },
+	{ "steam",    NULL,       NULL,       	    1 << 7,       0,           NULL,         0,        -1 },
+	{ "discord",  NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
+	{ "Spotify",  NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
+	{ "KeePassXC",NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
 	{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ TERMCLASS,      "floatterm", NULL,       	    0,       1,           1,         0,        -1 },
@@ -167,7 +176,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
-	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lf") },
+	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ranger") },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
@@ -236,7 +245,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
 	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
-	{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+	/*{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },*/
 
 	{ MODKEY,			XK_F1,		spawn,  	SHCMD("maim $HOME/Pictures/screenshots/pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ MODKEY|ShiftMask,			XK_F1,		spawn,		{.v = (const char*[]){ "maimpick", NULL } } },
