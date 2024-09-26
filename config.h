@@ -50,10 +50,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	*/
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ "steam",    NULL,       NULL,       	    1 << 3,       0,           NULL,         0,        -1 },
+	{ "steam",    NULL,       NULL,       	    1 << 7,       0,           NULL,         0,        -1 },
 	{ "discord",  NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
-	{ "spotify",  NULL,       NULL,       	    1 << 9,       0,           NULL,         0,        -1 },
-	{ "keepassxc",NULL,       NULL,       	    1 << 9,       0,           NULL,         0,        -1 },
+	{ "Spotify",  NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
+	{ "KeePassXC",NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
 	{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ TERMCLASS,      "floatterm", NULL,       	    0,       1,           1,         0,        -1 },
@@ -170,7 +170,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
-	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lf") },
+	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ranger") },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
