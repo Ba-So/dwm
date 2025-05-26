@@ -9,7 +9,7 @@
   conf ? null,
 }: let
   fs = lib.fileset;
-  src = fs.difference (fs.gitTracked ./.) (fs.unions [
+  srx = fs.difference (fs.gitTracked ./.) (fs.unions [
     ./flake.lock
     (fs.fileFilter (file: lib.strings.hasInfix ".git" file.name) ./.)
     (fs.fileFilter (file: file.hasExt "nix") ./.)
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   src = fs.toSource {
     root = ./.;
-    fileset = src;
+    fileset = srx;
   };
 
   buildInputs = [
