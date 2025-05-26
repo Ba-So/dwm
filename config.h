@@ -1,15 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-<<<<<<< HEAD
 #define TERMINAL "alacritty"
 #define TERMCLASS "Alacritty"
-#define BROWSER "brave-browser"
-=======
-#define TERMINAL "st"
-#define TERMCLASS "St"
 #define BROWSER "brave"
->>>>>>> nix-changes
 
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
