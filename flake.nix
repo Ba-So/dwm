@@ -23,7 +23,6 @@
           localSystem.system = system;
           overlays = [self.overlays.dwm];
         });
-      gitRev = self.rev or self.dirtyRev or null;
     in {
 
       packages = eachSystem (system: {
@@ -33,7 +32,7 @@
       
       overlays = {
         dwm = final: prev: {
-          dwm = final.callPackage ./default.nix {inherit gitRev;};
+          dwm = final.callPackage ./default.nix {};
         };
         default = self.overlays.dwm;
       };
