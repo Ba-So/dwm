@@ -50,10 +50,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	*/
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ "steam",    NULL,       NULL,       	    1 << 7,       0,           NULL,         0,        -1 },
-	{ "discord",  NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
-	{ "Spotify",  NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
-	{ "KeePassXC",NULL,       NULL,       	    1 << 8,       0,           NULL,         0,        -1 },
+	{ "steam",    NULL,       NULL,       	    1 << 7,       0,           0,         0,        -1 },
+	{ "discord",  NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1 },
+	{ "Spotify",  NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1 },
+	{ "KeePassXC",NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1 },
 	{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ TERMCLASS,      "floatterm", NULL,       	    0,       1,           1,         0,        -1 },
@@ -194,7 +194,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_a,		togglegaps,	{0} },
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
-	{ MODKEY|ShiftMask,		XK_s,		makestatmon,          },
+	/*{ MODKEY|ShiftMask,		XK_s,		makestatmon,          },*/
 	{ MODKEY,			XK_d,		spawn,          SHCMD("dmenu_run") },
 	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("passmenu") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
