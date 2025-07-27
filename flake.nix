@@ -3,38 +3,46 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
     self, 
-    nixpkgs, 
+    nixpkgs,
+    flake-utils,
     ... 
-    }: let
-      inherit (nixpkgs) lib;
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-      eachSystem = lib.genAttrs systems;
-      pkgsFor = eachSystem (system:
-        import nixpkgs {
-          localSystem.system = system;
-          overlays = [self.overlays.dwm];
-        });
-    in {
-
-      packages = eachSystem (system: {
-        inherit (pkgsFor.${system}) dwm;
-        default = self.packages.${system}.dwm;
-      });
-      
-      overlays = {
-        dwm = final: prev: {
-          dwm = final.callPackage ./default.nix {};
-        };
-        default = self.overlays.dwm;
+  }:
+  flake-utils.lib.eachDefaultSystem ( system:
+    let
+      pkgs = import nixpkgs {
+        localSystem = "${system}";
       };
-    };
+      env = pkgs.stdenv;
+
+      buildInputs = with pkgs; with xorg; [
+        libX11
+        libXinerama
+        libXft
+      ];
+      dwm = env.mkDerivation {
+        name = "dwm";
+        src = self;
+        buildInputs = buildInputs;
+        installPhase = ''
+          mkdir -p $out/bin
+          mv dwm $out/bin
+        '';
+      };
+
+    in
+    {
+      devShell = env.mkDerviation {
+        buildInputs = buildInputs;
+      };
+      packages = {
+        dwm = dwm;
+        default = dwm;
+      };
+    }
+  );
 }
