@@ -239,7 +239,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
 	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
-	/*{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },*/
 
 	{ MODKEY,			XK_F1,		spawn,  	SHCMD("maim $HOME/Pictures/screenshots/pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ MODKEY|ShiftMask,			XK_F1,		spawn,		{.v = (const char*[]){ "maimpick", NULL } } },
