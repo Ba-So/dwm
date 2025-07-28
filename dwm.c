@@ -1678,7 +1678,15 @@ run(void)
 
 void
 runAutostart(void) {
-	system("killall -q dwmblocks; dwmblocks &");
+	char *home = getenv("HOME");
+	char autostartpath[256];
+	
+	if (home) {
+		snprintf(autostartpath, sizeof(autostartpath), "%s/.config/dwm/autostart", home);
+		if (access(autostartpath, X_OK) == 0) {
+			system(autostartpath);
+		}
+	}
 }
 
 void
