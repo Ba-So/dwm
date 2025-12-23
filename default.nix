@@ -4,6 +4,7 @@
   libX11,
   libXinerama,
   libXft,
+  libxcb,
   writeText,
   patches ? [ ],
   conf ? null,
@@ -32,6 +33,7 @@ stdenv.mkDerivation rec {
     libX11
     libXinerama
     libXft
+    libxcb
   ];
 
   prePatch = ''

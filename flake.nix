@@ -23,6 +23,7 @@
         libX11
         libXinerama
         libXft
+        libxcb
       ];
       dwm = env.mkDerivation {
         name = "dwm";
